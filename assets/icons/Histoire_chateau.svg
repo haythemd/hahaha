@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18.066" height="26.317" viewBox="0 0 18.066 26.317">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_70" data-name="Rectangle 70" width="18.066" height="26.316" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="Histoire_chateau" transform="translate(0 0)">
+    <path id="Tracé_71" data-name="Tracé 71" d="M14.593,4.975V1.042h2.328V6.177H1.674V1.042H4V4.975H8.415V1.042h2.328V4.975ZM13.551,0V3.933H11.784V0H7.373V3.933H5.045V0H.633V7.22h17.33V0Z" transform="translate(0.027 0)" fill="#fff"/>
+    <path id="Tracé_72" data-name="Tracé 72" d="M14.676,9.1,16.87,25.018H1.237L3.981,9.108,1.588,6.116l-.815.651,2.1,2.626L0,26.06H18.066L15.768,9.4l2.107-2.633-.814-.651Z" transform="translate(0 0.257)" fill="#fff"/>
+    <rect id="Rectangle_69" data-name="Rectangle 69" width="11.795" height="1.042" transform="translate(3.428 8.986)" fill="#fff"/>
+    <g id="Groupe_75" data-name="Groupe 75" transform="translate(0 0)">
+      <g id="Groupe_74" data-name="Groupe 74" clip-path="url(#clip-path)">
+        <path id="Tracé_73" data-name="Tracé 73" d="M10.966,25.139l-.018-6.585a1.591,1.591,0,0,0-.091-.531l-.06-.168a1.762,1.762,0,0,0-3.353.129,1.838,1.838,0,0,0-.093.543v6.611H6.309V18.527a2.639,2.639,0,0,1,.105-.737A2.852,2.852,0,0,1,9.1,15.654h.059a2.778,2.778,0,0,1,2.623,1.853l.06.167a2.606,2.606,0,0,1,.151.879l.018,6.584Z" transform="translate(0.265 0.658)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

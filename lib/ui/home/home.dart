@@ -1,5 +1,7 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/ui/home/map.dart';
+import 'package:boilerplate/ui/info/info.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
 import 'package:boilerplate/stores/language/language_store.dart';
 import 'package:boilerplate/stores/post/post_store.dart';
@@ -8,6 +10,7 @@ import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/widgets/progress_indicator_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:material_dialog/material_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,14 +20,16 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   //stores:---------------------------------------------------------------------
   late PostStore _postStore;
   late ThemeStore _themeStore;
   late LanguageStore _languageStore;
-
+  late TabController tabController ;
+  String title = 'Accueil';
   @override
   void initState() {
+    tabController = new TabController(length: 5, vsync: this);
     super.initState();
   }
 
@@ -46,18 +51,27 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(),
+      extendBodyBehindAppBar: false,
+      appBar: PreferredSize(child: Row(children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),Text('Title'),Spacer()],), preferredSize: Size.fromHeight(80)),
+      body: TabBarView(
+        controller: tabController,
+        children: [MapWidget(),Container(),Container(),Container(),InfoWidget()],),
+      bottomNavigationBar: Container( color: Colors.black,height: 80,
+        child: TabBar(
+          controller: tabController,
+
+            tabs: [
+          Tab(icon: SvgPicture.asset('assets/icons/Acceuil.svg',color: Colors.white,), text: 'Accueil'),
+          Tab(icon: SvgPicture.asset('assets/icons/Histoire_chateau.svg',color: Colors.white,), text:'Historique du château'),
+              Tab(icon: SvgPicture.asset('assets/icons/Histoire_jardin.svg',color: Colors.white,), text: 'Historique des jardins'),
+              Tab(icon: SvgPicture.asset('assets/icons/Map.svg',color: Colors.white,), text:'Map'),
+              Tab(icon: SvgPicture.asset('assets/icons/Info.svg',color: Colors.white,), text: 'Info'),
+        ], ),
+      ),
     );
   }
 
-  // app bar methods:-----------------------------------------------------------
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      title: Text(AppLocalizations.of(context).translate('home_tv_posts')),
-      actions: _buildActions(context),
-    );
-  }
+
 
   List<Widget> _buildActions(BuildContext context) {
     return <Widget>[

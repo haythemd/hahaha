@@ -47,17 +47,5 @@ class _XXTeaCodec extends Codec<Map<String, dynamic>, String> {
   Converter<Map<String, dynamic>, String> get encoder => _encoder;
 }
 
-/// Create a codec to use when opening an encrypted sembast database
-///
-/// The usage is then
-///
-/// ```dart
-/// // Initialize the encryption codec with a user password
-/// var codec = getXXTeaCodec(password: '[your_user_password]');
-/// // Open the database with the codec
-/// Database db = await factory.openDatabase(dbPath, codec: codec);
-///
-/// // ...your database is ready to use as encrypted
-/// ```
 SembastCodec getXXTeaCodec({required String password}) =>
     SembastCodec(signature: 'xxtea', codec: _XXTeaCodec(password));
