@@ -21,9 +21,7 @@ class AppIconWidget extends StatelessWidget {
       imageSize = (size.height * 0.20);
     }
 
-    return Image.asset(
-      image,
-      height: imageSize,
+    return Container(color: Colors.white
     );
   }
 }

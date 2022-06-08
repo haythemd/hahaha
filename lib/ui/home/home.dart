@@ -1,5 +1,8 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:boilerplate/constants/font_family.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
+import 'package:boilerplate/ui/Accueil/HomePage.dart';
+import 'package:boilerplate/ui/Chateau.dart';
 import 'package:boilerplate/ui/home/map.dart';
 import 'package:boilerplate/ui/info/info.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
@@ -15,6 +18,8 @@ import 'package:material_dialog/material_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../Jardin.dart';
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -27,9 +32,15 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   late LanguageStore _languageStore;
   late TabController tabController ;
   String title = 'Accueil';
+  List<String> titles = ['Accueil','Historique du château','Historique des jardins','Map','Info'];
   @override
   void initState() {
     tabController = new TabController(length: 5, vsync: this);
+    tabController.addListener(() {
+      setState(() {
+        title=titles[tabController.index];
+      });
+    });
     super.initState();
   }
 
@@ -47,26 +58,29 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       _postStore.getPosts();
     }
   }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: false,
-      appBar: PreferredSize(child: Row(children: [IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),Text('Title'),Spacer()],), preferredSize: Size.fromHeight(80)),
-      body: TabBarView(
-        controller: tabController,
-        children: [MapWidget(),Container(),Container(),Container(),InfoWidget()],),
-      bottomNavigationBar: Container( color: Colors.black,height: 80,
-        child: TabBar(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(backgroundColor:Color(0xFF111111),title: Text(title,style: DefaultFont.light),centerTitle: true,leading: IconButton(onPressed: (){
+          Navigator.of(context).pushReplacementNamed(Routes.splash);
+        }, icon: Icon(Icons.arrow_back,color: Colors.white,)),),
+        body: TabBarView(
           controller: tabController,
+          children: [HomePage(),Chateau(),Jardin(),MapWidget(),InfoWidget()],),
+        bottomNavigationBar: Container( color: Colors.black,height: 80,
+          child: TabBar(
+            labelStyle: DefaultFont.light.copyWith(fontSize: 1,color: Colors.transparent),
+            controller: tabController,
 
-            tabs: [
-          Tab(icon: SvgPicture.asset('assets/icons/Acceuil.svg',color: Colors.white,), text: 'Accueil'),
-          Tab(icon: SvgPicture.asset('assets/icons/Histoire_chateau.svg',color: Colors.white,), text:'Historique du château'),
-              Tab(icon: SvgPicture.asset('assets/icons/Histoire_jardin.svg',color: Colors.white,), text: 'Historique des jardins'),
-              Tab(icon: SvgPicture.asset('assets/icons/Map.svg',color: Colors.white,), text:'Map'),
-              Tab(icon: SvgPicture.asset('assets/icons/Info.svg',color: Colors.white,), text: 'Info'),
-        ], ),
+              tabs: [
+            Tab(icon: SvgPicture.asset('assets/icons/Acceuil.svg',color: Colors.white,), text: 'Accueil'),
+            Tab(icon: SvgPicture.asset('assets/icons/Histoire_chateau.svg',color: Colors.white,), text:'Historique du château'),
+                Tab(icon: SvgPicture.asset('assets/icons/Histoire_jardin.svg',color: Colors.white,), text: 'Historique des jardins'),
+                Tab(icon: SvgPicture.asset('assets/icons/Map.svg',color: Colors.white,), text:'Map'),
+                Tab(icon: SvgPicture.asset('assets/icons/Info.svg',color: Colors.white,), text: 'Info'),
+          ], ),
+        ),
       ),
     );
   }

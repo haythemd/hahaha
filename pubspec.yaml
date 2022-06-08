@@ -136,4 +136,31 @@ flutter:
       weight: 300
     - asset: assets/fonts/Calibri-Bold.ttf
       weight: 700
+  - family: Morganite
+    fonts:
+    - asset: assets/fonts/Morganite-Bold.ttf
+      weight: 700
+    - asset: assets/fonts/Morganite-Black.ttf
+      weight: 800
+    - asset: assets/fonts/Morganite-Thin.ttf
+      weight: 100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
